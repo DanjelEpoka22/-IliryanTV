@@ -23,16 +23,19 @@ foreach ($tv_shows as $show) {
 }
 
 // Merr lajmet për programet TV
-$shows_news = getNewsByCategory($pdo, 'shows', 5);
+$shows_news = getNewsByCategory($pdo, 'shows', 6);
 ?>
 
-<section class="shows-page">
+<section class="shows-page py-5">
     <div class="container">
         <h1 class="page-title">Programet TV</h1>
         
         <!-- Orari i Programeve -->
         <div class="tv-schedule">
-            <h2 class="section-title">Orari Javor i Programeve</h2>
+            <div class="section-header">
+                <h2 class="section-title">Orari Javor i Programeve</h2>
+                <p class="section-subtitle">Shiko programin e plotë të javës</p>
+            </div>
             
             <?php if (!empty($shows_by_day)): ?>
                 <div class="schedule-days">
@@ -59,12 +62,15 @@ $shows_news = getNewsByCategory($pdo, 'shows', 5);
                                         <?php echo date('H:i', strtotime($show['show_time'])); ?>
                                     </div>
                                     <div class="show-info">
-                                        <h4><?php echo $show['title']; ?></h4>
-                                        <?php if ($show['description']): ?>
-                                            <p><?php echo $show['description']; ?></p>
+                                        <h4><?php echo htmlspecialchars($show['title']); ?></h4>
+                                        <?php if (!empty($show['description'])): ?>
+                                            <p><?php echo htmlspecialchars(substr($show['description'], 0, 80)); ?></p>
                                         <?php endif; ?>
-                                        <?php if ($show['season'] && $show['episode']): ?>
-                                            <span class="show-meta">Sezoni <?php echo $show['season']; ?>, Episodi <?php echo $show['episode']; ?></span>
+                                        <?php if (!empty($show['season']) && !empty($show['episode'])): ?>
+                                            <span class="show-meta">
+                                                <i class="fas fa-play-circle me-1"></i>
+                                                Sezoni <?php echo intval($show['season']); ?>, Episodi <?php echo intval($show['episode']); ?>
+                                            </span>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -76,6 +82,7 @@ $shows_news = getNewsByCategory($pdo, 'shows', 5);
                 </div>
             <?php else: ?>
                 <div class="no-shows">
+                    <i class="fas fa-tv fa-3x mb-3" style="color: #999;"></i>
                     <p>Asnjë program TV në këtë kohë.</p>
                 </div>
             <?php endif; ?>
@@ -83,26 +90,44 @@ $shows_news = getNewsByCategory($pdo, 'shows', 5);
         
         <!-- Lajmet për Programet -->
         <div class="shows-news-section">
-            <h2 class="section-title">Lajme për Programet TV</h2>
+            <div class="section-header">
+                <h2 class="section-title">Lajme për Programet TV</h2>
+                <p class="section-subtitle">Zbuloni më shumë për programet tuaja të preferuara</p>
+            </div>
+            
             <div class="news-grid">
                 <?php if (!empty($shows_news)): ?>
                     <?php foreach($shows_news as $news): ?>
                     <div class="news-card">
-                        <?php if($news['image_path']): ?>
                         <div class="news-image">
-                            <img src="<?php echo SITE_URL . '/' . $news['image_path']; ?>" alt="<?php echo $news['title']; ?>">
+                            <?php if(!empty($news['image_path']) && file_exists($news['image_path'])): ?>
+                                <img src="<?php echo SITE_URL . '/' . htmlspecialchars($news['image_path']); ?>" 
+                                     alt="<?php echo htmlspecialchars($news['title']); ?>" 
+                                     loading="lazy">
+                            <?php else: ?>
+                                <div class="news-image-placeholder">
+                                    <i class="fas fa-tv"></i>
+                                </div>
+                            <?php endif; ?>
                         </div>
-                        <?php endif; ?>
                         <div class="news-content">
-                            <h3><?php echo $news['title']; ?></h3>
-                            <p><?php echo substr($news['description'], 0, 100); ?>...</p>
-                            <span class="news-date"><?php echo formatDate($news['created_at']); ?></span>
-                            <a href="news-detail.php?id=<?php echo $news['id']; ?>" class="read-more">Lexo më shumë</a>
+                            <h3><?php echo htmlspecialchars($news['title']); ?></h3>
+                            <p><?php echo htmlspecialchars(substr($news['description'], 0, 120)); ?></p>
+                            <div class="news-meta">
+                                <span class="news-date">
+                                    <i class="fas fa-calendar me-1"></i>
+                                    <?php echo formatDate($news['created_at']); ?>
+                                </span>
+                            </div>
+                            <a href="news-detail.php?id=<?php echo intval($news['id']); ?>" class="read-more">
+                                Lexo më shumë <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
                         </div>
                     </div>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <div class="no-news">
+                        <i class="fas fa-newspaper fa-3x mb-3" style="color: #999;"></i>
                         <p>Asnjë lajm për programet TV në këtë kohë.</p>
                     </div>
                 <?php endif; ?>

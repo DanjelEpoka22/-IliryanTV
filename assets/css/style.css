@@ -829,3 +829,431 @@ footer a:hover {
 .bg-light {
     background-color: var(--light-bg) !important;
 }
+
+/* ========== NEWS PAGE STYLES ========== */
+.news-page {
+    background-color: var(--white);
+}
+
+.news-page .page-title {
+    margin-bottom: 3rem;
+    color: var(--text-color);
+}
+
+/* ========== SPORTS PAGE STYLES ========== */
+.sports-page {
+    background-color: var(--white);
+    padding-top: 2rem;
+}
+
+.sports-page .page-title {
+    margin-bottom: 3rem;
+    color: var(--text-color);
+}
+
+/* Sports Events Grid */
+.sports-section {
+    margin-bottom: 4rem;
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.event-card {
+    background: var(--white);
+    border: 2px solid #eee;
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.event-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-color);
+}
+
+.event-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.event-header h3 {
+    font-size: 1.2rem;
+    margin: 0;
+    color: var(--text-color);
+    flex: 1;
+}
+
+.event-status {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+    margin-left: 0.5rem;
+}
+
+.event-status.upcoming {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.event-status.live {
+    background-color: #ffebee;
+    color: var(--primary-color);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.event-status.finished {
+    background-color: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.teams {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--light-bg);
+    border-radius: 8px;
+}
+
+.team {
+    flex: 1;
+    text-align: center;
+}
+
+.team-name {
+    display: block;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.score {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--primary-color);
+}
+
+.vs {
+    font-weight: 700;
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.event-meta {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+}
+
+.event-date {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.8rem;
+}
+
+.event-date i {
+    color: var(--primary-color);
+    margin-right: 0.5rem;
+}
+
+.event-description {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.6;
+    margin: 0.8rem 0 0 0;
+}
+
+.no-events,
+.no-news,
+.no-shows {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: var(--light-bg);
+    border-radius: 12px;
+    color: #999;
+}
+
+.no-events p,
+.no-news p,
+.no-shows p {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+/* Sports News Section */
+.sports-news-section {
+    margin-top: 4rem;
+}
+
+.sports-news-section .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* ========== SHOWS PAGE STYLES ========== */
+.shows-page {
+    background-color: var(--white);
+    padding-top: 2rem;
+}
+
+.shows-page .page-title {
+    margin-bottom: 3rem;
+    color: var(--text-color);
+}
+
+/* TV Schedule */
+.tv-schedule {
+    margin-bottom: 4rem;
+}
+
+.schedule-days {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.schedule-day {
+    background: var(--white);
+    border: 2px solid #eee;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.schedule-day:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-color);
+}
+
+.schedule-day h3 {
+    background: linear-gradient(135deg, #e41e26 0%, #c41a22 100%);
+    color: var(--white);
+    padding: 1.2rem;
+    margin: 0;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.shows-list {
+    padding: 1.5rem;
+}
+
+.show-item {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+    transition: all 0.3s ease;
+}
+
+.show-item:last-child {
+    border-bottom: none;
+}
+
+.show-item:hover {
+    background-color: var(--light-bg);
+    padding: 1rem;
+    margin: 0 -1rem;
+    padding-left: 1rem;
+    border-radius: 8px;
+}
+
+.show-time {
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    min-width: 60px;
+    text-align: center;
+}
+
+.show-info {
+    flex: 1;
+}
+
+.show-info h4 {
+    margin: 0 0 0.4rem 0;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.show-info p {
+    margin: 0.4rem 0;
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+.show-meta {
+    display: inline-block;
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+/* Shows News Section */
+.shows-news-section {
+    margin-top: 4rem;
+}
+
+.shows-news-section .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* ========== GENERIC NEWS GRID ========== */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* ========== SECTION STYLING ========== */
+.sports-section .section-title,
+.sports-news-section .section-title,
+.tv-schedule .section-title,
+.shows-news-section .section-title {
+    margin-top: 2rem;
+}
+
+/* ========== RESPONSIVE - SPORTS & SHOWS ========== */
+@media (max-width: 1200px) {
+    .events-grid,
+    .news-grid,
+    .schedule-days {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .events-grid,
+    .news-grid,
+    .schedule-days {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .event-card {
+        padding: 1.5rem;
+    }
+
+    .teams {
+        flex-direction: row;
+        padding: 1rem;
+        gap: 0.5rem;
+    }
+
+    .team {
+        min-width: 0;
+    }
+
+    .team-name {
+        font-size: 0.9rem;
+    }
+
+    .score {
+        font-size: 1.5rem;
+    }
+
+    .vs {
+        font-size: 0.8rem;
+    }
+
+    .show-item {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .show-time {
+        min-width: auto;
+        text-align: left;
+        font-size: 1rem;
+    }
+
+    .show-info h4 {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .event-card {
+        padding: 1rem;
+    }
+
+    .event-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .event-header h3 {
+        font-size: 1.1rem;
+    }
+
+    .event-status {
+        align-self: flex-start;
+        margin-left: 0;
+    }
+
+    .teams {
+        padding: 1rem 0.8rem;
+    }
+
+    .schedule-day h3 {
+        padding: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .shows-list {
+        padding: 1rem;
+    }
+
+    .show-item {
+        padding: 0.8rem 0;
+    }
+
+    .show-time {
+        font-size: 0.95rem;
+    }
+
+    .show-info h4 {
+        font-size: 0.9rem;
+    }
+
+    .show-info p {
+        font-size: 0.8rem;
+    }
+}
