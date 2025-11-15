@@ -1,5 +1,10 @@
 <?php
+// Funksioni i ri redirect me output buffering
 function redirect($url) {
+    // Pastro çdo output buffer
+    while (ob_get_level()) {
+        ob_end_clean();
+    }
     header("Location: $url");
     exit();
 }
@@ -41,4 +46,6 @@ function getFeaturedNewsAlt($pdo, $limit = 5) {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+// MOS I SHTO FUNKSIONET E ADMINIT KËTU - ato janë tashmë në auth.php
 ?>

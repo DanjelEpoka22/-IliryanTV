@@ -1,3 +1,11 @@
+<?php
+// Start session nëse nuk është startuar
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Përfshij user authentication functions
+require_once __DIR__ . '/user_auth.php';
 ?>
 <!DOCTYPE html>
 <html lang="sq" data-bs-theme="light">
@@ -27,6 +35,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/style.css">
     <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/admin.css">
+    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/user.css">
 </head>
 <body>
     <!-- Loading Spinner (hidden by default) -->
@@ -76,6 +85,42 @@
                             <i class="fas fa-envelope me-1"></i>Kontakt
                         </a>
                     </li>
+                    
+                    <!-- ✅ USER MENU -->
+                    <?php if (isUserLoggedIn()): ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-success" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user me-1"></i><?php echo htmlspecialchars(getUserUsername()); ?>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/profile.php">
+                                <i class="fas fa-user-circle me-2"></i>Profili
+                            </a></li>
+                            <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/favorites.php">
+                                <i class="fas fa-heart me-2"></i>Lajmet e Preferuara
+                            </a></li>
+                            <li><a class="dropdown-item" href="<?php echo SITE_URL; ?>/bookmarks.php">
+                                <i class="fas fa-bookmark me-2"></i>Programet e Bookmarked
+                            </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="<?php echo SITE_URL; ?>/logout.php">
+                                <i class="fas fa-sign-out-alt me-2"></i>Dil
+                            </a></li>
+                        </ul>
+                    </li>
+                    <?php else: ?>
+                    <li class="nav-item">
+                        <a class="nav-link text-warning" href="<?php echo SITE_URL; ?>/login.php">
+                            <i class="fas fa-sign-in-alt me-1"></i>Hyr
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-info" href="<?php echo SITE_URL; ?>/register.php">
+                            <i class="fas fa-user-plus me-1"></i>Regjistrohu
+                        </a>
+                    </li>
+                    <?php endif; ?>
+                    
                     <?php if (function_exists('isAdminLoggedIn') && isAdminLoggedIn()): ?>
                     <li class="nav-item">
                         <a class="nav-link text-warning" href="<?php echo SITE_URL; ?>/admin/dashboard.php">

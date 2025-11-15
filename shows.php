@@ -1,6 +1,8 @@
 <?php
 require_once 'includes/config.php';
 require_once 'includes/functions.php';
+require_once 'includes/user_auth.php'; // ✅ I RI
+require_once 'includes/user_functions.php'; // ✅ I RI
 
 $page_title = "Programet TV";
 include 'includes/header.php';
@@ -56,13 +58,33 @@ $shows_news = getNewsByCategory($pdo, 'shows', 6);
                             ?></h3>
                             
                             <div class="shows-list">
-                                <?php foreach($shows_by_day[$day] as $show): ?>
+                                <?php foreach($shows_by_day[$day] as $show): 
+                                    // ✅ Kontrollo nëse programi është bookmarked
+                                    $is_bookmarked = false;
+                                    if (isUserLoggedIn()) {
+                                        $is_bookmarked = isShowBookmarked(getUserID(), $show['id']);
+                                    }
+                                ?>
                                 <div class="show-item">
                                     <div class="show-time">
                                         <?php echo date('H:i', strtotime($show['show_time'])); ?>
                                     </div>
                                     <div class="show-info">
-                                        <h4><?php echo htmlspecialchars($show['title']); ?></h4>
+                                        <div class="show-header">
+                                            <h4><?php echo htmlspecialchars($show['title']); ?></h4>
+                                            <!-- ✅ BOOKMARK BUTTON -->
+                                            <?php if (isUserLoggedIn()): ?>
+                                            <button class="btn-bookmark <?php echo $is_bookmarked ? 'bookmarked' : ''; ?>" 
+                                                    data-show-id="<?php echo $show['id']; ?>"
+                                                    title="<?php echo $is_bookmarked ? 'Hiq bookmark' : 'Shto në bookmark'; ?>">
+                                                <i class="fas fa-bookmark"></i>
+                                            </button>
+                                            <?php else: ?>
+                                            <a href="login.php" class="btn-bookmark" title="Login për bookmark">
+                                                <i class="far fa-bookmark"></i>
+                                            </a>
+                                            <?php endif; ?>
+                                        </div>
                                         <?php if (!empty($show['description'])): ?>
                                             <p><?php echo htmlspecialchars(substr($show['description'], 0, 80)); ?></p>
                                         <?php endif; ?>
@@ -97,7 +119,13 @@ $shows_news = getNewsByCategory($pdo, 'shows', 6);
             
             <div class="news-grid">
                 <?php if (!empty($shows_news)): ?>
-                    <?php foreach($shows_news as $news): ?>
+                    <?php foreach($shows_news as $news): 
+                        // ✅ Kontrollo nëse useri e ka këtë lajm të preferuar
+                        $is_favorite = false;
+                        if (isUserLoggedIn()) {
+                            $is_favorite = isNewsFavorite(getUserID(), $news['id']);
+                        }
+                    ?>
                     <div class="news-card">
                         <div class="news-image">
                             <?php if(!empty($news['image_path']) && file_exists($news['image_path'])): ?>
@@ -108,6 +136,15 @@ $shows_news = getNewsByCategory($pdo, 'shows', 6);
                                 <div class="news-image-placeholder">
                                     <i class="fas fa-tv"></i>
                                 </div>
+                            <?php endif; ?>
+                            
+                            <!-- ✅ FAVORITE BUTTON -->
+                            <?php if (isUserLoggedIn()): ?>
+                            <button class="btn-favorite <?php echo $is_favorite ? 'favorited' : ''; ?>" 
+                                    data-news-id="<?php echo $news['id']; ?>"
+                                    title="<?php echo $is_favorite ? 'Hiq nga favorite' : 'Shto në favorite'; ?>">
+                                <i class="fas fa-star"></i>
+                            </button>
                             <?php endif; ?>
                         </div>
                         <div class="news-content">
@@ -135,5 +172,8 @@ $shows_news = getNewsByCategory($pdo, 'shows', 6);
         </div>
     </div>
 </section>
+
+<!-- ✅ JavaScript për User Interactions -->
+<script src="<?php echo SITE_URL; ?>/assets/js/user.js"></script>
 
 <?php include 'includes/footer.php'; ?>

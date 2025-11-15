@@ -1,13 +1,16 @@
 <?php
+// Fillo output buffering
+if (!ob_get_level()) {
+    ob_start();
+}
+
 require_once '../includes/config.php';
 require_once '../includes/auth.php';
 require_once '../includes/functions.php';
 
 requireAdminAuth();
 
-$page_title = "Shto Program TV";
-include '../includes/header.php';
-
+// PËRPUNIMI I FORMËS DUHET TË JETË PARA HEADER
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = sanitize($_POST['title']);
     $description = sanitize($_POST['description']);
@@ -20,49 +23,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     if ($stmt->execute([$title, $description, $show_time, $show_day, $season, $episode])) {
         $_SESSION['success'] = "Programi TV u shtua me sukses!";
-        redirect('manage_shows.php');
+        // REDIRECT PARA SE TË DËRGOJË OUTPUT
+        while (ob_get_level()) {
+            ob_end_clean();
+        }
+        header('Location: manage_shows.php');
+        exit();
     } else {
         $error = "Gabim gjatë shtimit të programit!";
     }
 }
+
+// TANI MUND TË PËRFSHIJ HEADER
+$page_title = "Shto Program TV";
+include 'includes/admin_header.php';
 ?>
 
-<div class="admin-container">
-    <div class="admin-sidebar">
-        <h3>Admin Panel</h3>
-        <ul>
-            <li><a href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-            <li><a href="manage_news.php"><i class="fas fa-newspaper"></i> Menaxho Lajmet</a></li>
-            <li><a href="add_news.php"><i class="fas fa-plus"></i> Shto Lajm</a></li>
-            <li><a href="manage_sports.php"><i class="fas fa-football-ball"></i> Sporti</a></li>
-            <li><a href="manage_shows.php"><i class="fas fa-tv"></i> Programet TV</a></li>
-            <li><a href="add_shows.php" class="active"><i class="fas fa-plus"></i> Shto Program</a></li>
-            <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Dil</a></li>
-        </ul>
-    </div>
-    
-    <div class="admin-content">
-        <h1>Shto Program TV</h1>
-        
-        <?php if (isset($error)): ?>
-            <div class="alert error"><?php echo $error; ?></div>
-        <?php endif; ?>
-        
-        <form method="POST" class="shows-form">
-            <div class="form-group">
-                <label for="title">Titulli i Programit *</label>
-                <input type="text" id="title" name="title" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="description">Përshkrimi</label>
-                <textarea id="description" name="description" rows="3"></textarea>
-            </div>
-            
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="show_day">Dita e Java *</label>
-                    <select id="show_day" name="show_day" required>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Shto Program TV</h1>
+</div>
+
+<?php if (isset($error)): ?>
+    <div class="alert alert-danger"><?php echo $error; ?></div>
+<?php endif; ?>
+
+<div class="card">
+    <div class="card-body">
+        <form method="POST">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="title" class="form-label">Titulli i Programit *</label>
+                    <input type="text" class="form-control" id="title" name="title" required>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label for="show_day" class="form-label">Dita e Java *</label>
+                    <select class="form-control" id="show_day" name="show_day" required>
                         <option value="Monday">E Hënë</option>
                         <option value="Tuesday">E Martë</option>
                         <option value="Wednesday">E Mërkurë</option>
@@ -72,28 +68,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <option value="Sunday">E Dielë</option>
                     </select>
                 </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="show_time" class="form-label">Koha *</label>
+                    <input type="time" class="form-control" id="show_time" name="show_time" required>
+                </div>
                 
-                <div class="form-group">
-                    <label for="show_time">Koha *</label>
-                    <input type="time" id="show_time" name="show_time" required>
+                <div class="col-md-6 mb-3">
+                    <label for="description" class="form-label">Përshkrimi</label>
+                    <textarea class="form-control" id="description" name="description" rows="3"></textarea>
                 </div>
             </div>
             
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="season">Sezoni</label>
-                    <input type="number" id="season" name="season" min="1">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="season" class="form-label">Sezoni</label>
+                    <input type="number" class="form-control" id="season" name="season" min="1">
                 </div>
                 
-                <div class="form-group">
-                    <label for="episode">Episodi</label>
-                    <input type="number" id="episode" name="episode" min="1">
+                <div class="col-md-6 mb-3">
+                    <label for="episode" class="form-label">Episodi</label>
+                    <input type="number" class="form-control" id="episode" name="episode" min="1">
                 </div>
             </div>
             
             <button type="submit" class="btn btn-primary">Shto Programin</button>
+            <a href="manage_shows.php" class="btn btn-secondary">Anulo</a>
         </form>
     </div>
 </div>
 
-<?php include '../includes/footer.php'; ?>
+<?php include 'includes/admin_footer.php'; ?>
