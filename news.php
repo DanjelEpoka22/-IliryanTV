@@ -4,6 +4,21 @@ require_once 'includes/functions.php';
 
 $page_title = "Lajmet";
 include 'includes/header.php';
+?>
+
+<!-- Albanian Culture Banner -->
+<section class="albanian-culture-banner">
+    <div class="container">
+        <div class="banner-content">
+            <h3>
+                <i class="fas fa-newspaper me-2"></i>Lajmet e Kombit Tonë
+            </h3>
+            <p>Mbani veten e informuar me lajmet më të fundit që lidhen me Shqipërinë dhe shqiptarët</p>
+        </div>
+    </div>
+</section>
+
+<?php
 
 // Përfshij user functions VETËM nëse ekzistojnë dhe nëse useri është i loguar
 if (file_exists('includes/user_functions.php')) {

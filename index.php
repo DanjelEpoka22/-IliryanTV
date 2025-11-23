@@ -2,7 +2,7 @@
 require_once 'includes/config.php';
 require_once 'includes/functions.php';
 
-$page_title = "Kryefaqja - IliryanTV";
+$page_title = "Kryefaqja - IllyrianTV";
 include 'includes/header.php';
 
 // Get featured and latest news
@@ -11,14 +11,17 @@ $latest_news = getLatestNews($pdo, 8);
 ?>
 
 <!-- Hero Section -->
-<section class="hero-section">
+<section class="hero-section" style="background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(45, 45, 45, 0.7) 100%), url('<?php echo SITE_URL; ?>/assets/hero.jpg') center/cover no-repeat;">
     <div class="container">
         <div class="hero-content">
             <h1 class="hero-title">
-                Iliryan<span class="text-danger">TV</span>
+                Illyrian<span class="text-danger">TV</span>
             </h1>
             <p class="hero-subtitle">
-                Televizioni patriotik shqiptar - Lajmet më të fundit në kohë reale
+                Zëri i traditave shqiptare - Lajmet, Sporti dhe Programet më të mira
+            </p>
+            <p class="hero-tagline mt-3">
+                <i class="fas fa-flag me-2"></i>Krenaria e kombit tonë në çdo lajm
             </p>
             <div class="hero-buttons">
                 <a href="#latest-news" class="btn btn-danger btn-lg">
@@ -86,6 +89,18 @@ $latest_news = getLatestNews($pdo, 8);
     </div>
 </section>
 
+<!-- Albanian Culture Banner -->
+<section class="albanian-culture-banner">
+    <div class="container">
+        <div class="banner-content">
+            <h3>
+                <i class="fas fa-flag me-2"></i>Krenar për të qenë Shqiptar!
+            </h3>
+            <p>Bashkohu me komunitetin tonë dhe ndaj traditat tona të bukura me botën</p>
+        </div>
+    </div>
+</section>
+
 <!-- Quick Links Section -->
 <section class="py-5 bg-light">
     <div class="container">
@@ -95,7 +110,7 @@ $latest_news = getLatestNews($pdo, 8);
                     <div class="card-body">
                         <i class="fas fa-football-ball fa-3x text-danger mb-3"></i>
                         <h5 class="card-title">Sporti</h5>
-                        <p class="card-text">Ndiqni eventet sportive</p>
+                        <p class="card-text">Ndiqni eventet sportive dhe sukseset e kombit tonë</p>
                         <a href="sports.php" class="btn btn-outline-danger">Shiko Sportin</a>
                     </div>
                 </div>
@@ -105,7 +120,7 @@ $latest_news = getLatestNews($pdo, 8);
                     <div class="card-body">
                         <i class="fas fa-tv fa-3x text-danger mb-3"></i>
                         <h5 class="card-title">Programet TV</h5>
-                        <p class="card-text">Orari i programeve</p>
+                        <p class="card-text">Orari i programeve dhe emisioneve tona</p>
                         <a href="shows.php" class="btn btn-outline-danger">Shiko Programet</a>
                     </div>
                 </div>
@@ -115,7 +130,7 @@ $latest_news = getLatestNews($pdo, 8);
                     <div class="card-body">
                         <i class="fas fa-envelope fa-3x text-danger mb-3"></i>
                         <h5 class="card-title">Kontakt</h5>
-                        <p class="card-text">Na kontaktoni</p>
+                        <p class="card-text">Na kontaktoni për çdo pyetje ose sugjerim</p>
                         <a href="contact.php" class="btn btn-outline-danger">Kontakt</a>
                     </div>
                 </div>

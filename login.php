@@ -4,6 +4,8 @@ ob_start();
 
 require_once 'includes/config.php';
 require_once 'includes/functions.php';
+require_once 'includes/auth.php';
+require_once 'includes/user_auth.php';
 
 // Variablat për formën
 $username = '';
@@ -23,30 +25,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['password'] = 'Password është i detyrueshëm';
     }
 
-    // Verifikimi i kredencialeve
+    // Verifikimi i kredencialeve - kontrollo fillimisht admin, pastaj user
     if (empty($errors)) {
         try {
-            $stmt = $pdo->prepare("SELECT id, username, password FROM users WHERE username = ? OR email = ?");
-            $stmt->execute([$username, $username]);
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            // Kontrollo admin fillimisht
+            $admin_stmt = $pdo->prepare("SELECT id, username, password FROM admins WHERE username = ?");
+            $admin_stmt->execute([$username]);
+            $admin = $admin_stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($user && password_verify($password, $user['password'])) {
-                // Start session për login
-                if (session_status() === PHP_SESSION_NONE) {
-                    session_start();
-                }
-                require_once 'includes/user_auth.php';
-                userLogin($user['id'], $user['username']);
-                
-                // REDIRECT PARA SE TË DËRGOJË OUTPUT
-                if (isset($_GET['redirect'])) {
-                    header('Location: ' . urldecode($_GET['redirect']));
-                } else {
-                    header('Location: profile.php');
-                }
+            if ($admin && password_verify($password, $admin['password'])) {
+                // Admin login
+                adminLogin($admin['username'], $password, $pdo);
+                header('Location: admin/dashboard.php');
                 exit();
             } else {
-                $errors['general'] = 'Username/email ose password i gabuar';
+                // Kontrollo user
+                $user_stmt = $pdo->prepare("SELECT id, username, password FROM users WHERE username = ? OR email = ?");
+                $user_stmt->execute([$username, $username]);
+                $user = $user_stmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($user && password_verify($password, $user['password'])) {
+                    // User login
+                    userLogin($user['id'], $user['username']);
+                    
+                    // REDIRECT PARA SE TË DËRGOJË OUTPUT
+                    if (isset($_GET['redirect'])) {
+                        header('Location: ' . urldecode($_GET['redirect']));
+                    } else {
+                        header('Location: profile.php');
+                    }
+                    exit();
+                } else {
+                    $errors['general'] = 'Username/email ose password i gabuar';
+                }
             }
         } catch (PDOException $e) {
             $errors['general'] = 'Gabim në server: ' . $e->getMessage();
@@ -58,9 +69,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $page_title = "Hyr";
 include 'includes/header.php';
 
-// Nëse useri është i loguar, ridrejto në profil (duhet të jetë pas header)
+// Nëse useri ose admini është i loguar, ridrejto (duhet të jetë pas header)
 if (isUserLoggedIn()) {
     header('Location: profile.php');
+    exit();
+}
+if (isAdminLoggedIn()) {
+    header('Location: admin/dashboard.php');
     exit();
 }
 ?>
@@ -72,7 +87,7 @@ if (isUserLoggedIn()) {
                 <div class="auth-card">
                     <div class="auth-header text-center mb-4">
                         <h1 class="page-title">Hyr në Llogari</h1>
-                        <p class="text-muted">Hyr për të aksesuar të gjitha veçoritë</p>
+                        <p class="text-muted">Hyr si përdorues ose administrator</p>
                     </div>
 
                     <?php if (isset($errors['general'])): ?>

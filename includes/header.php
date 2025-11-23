@@ -43,7 +43,7 @@ require_once __DIR__ . '/user_auth.php';
         <div class="spinner-border text-danger" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
-        <p class="mt-2">IliryanTV</p>
+        <p class="mt-2">IllyrianTV</p>
     </div>
 
     <!-- Navigation -->
@@ -51,7 +51,7 @@ require_once __DIR__ . '/user_auth.php';
         <div class="container">
             <a class="navbar-brand fw-bold fs-3" href="<?php echo SITE_URL; ?>/index.php">
                 <i class="fas fa-tv me-2 text-danger"></i>
-                <span class="text-gradient">Iliryan</span><span class="text-danger">TV</span>
+                <span class="text-gradient">Illyrian</span><span class="text-danger">TV</span>
             </a>
             
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

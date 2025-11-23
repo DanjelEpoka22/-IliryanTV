@@ -39,13 +39,5 @@ function getNewsByCategory($pdo, $category, $limit = 10) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-// Alternative method using bindValue for LIMIT (more secure)
-function getFeaturedNewsAlt($pdo, $limit = 5) {
-    $stmt = $pdo->prepare("SELECT * FROM news WHERE featured = 1 ORDER BY created_at DESC LIMIT :limit");
-    $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
 // MOS I SHTO FUNKSIONET E ADMINIT KËTU - ato janë tashmë në auth.php
 ?>

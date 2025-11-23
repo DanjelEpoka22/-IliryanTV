@@ -6,6 +6,21 @@ require_once 'includes/user_functions.php'; // ✅ I RI
 
 $page_title = "Programet TV";
 include 'includes/header.php';
+?>
+
+<!-- Albanian Culture Banner -->
+<section class="albanian-culture-banner">
+    <div class="container">
+        <div class="banner-content">
+            <h3>
+                <i class="fas fa-tv me-2"></i>Programet e Traditave Tona
+            </h3>
+            <p>Shikoni programet tona që promovojnë kulturën dhe traditat shqiptare</p>
+        </div>
+    </div>
+</section>
+
+<?php
 
 // Merr programet TV
 $stmt = $pdo->prepare("SELECT * FROM tv_shows ORDER BY show_day, show_time");

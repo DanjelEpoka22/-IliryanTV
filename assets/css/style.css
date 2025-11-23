@@ -170,16 +170,27 @@ main {
 }
 
 /* ========== HERO SECTION ========== */
+/* ========== HERO SECTION WITH BACKGROUND IMAGE ========== */
+/* ========== HERO SECTION WITH BACKGROUND IMAGE ========== */
 .hero-section {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(45, 45, 45, 0.7) 100%),
+                url('../assets/hero.jpg') center/cover no-repeat;
     color: var(--white);
     position: relative;
     overflow: hidden;
-    padding: 100px 0;
-    min-height: 80vh;
+    padding: 120px 0;
+    min-height: 85vh;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.hero-title {
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.hero-subtitle {
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .hero-section::before {
@@ -189,8 +200,32 @@ main {
     right: -10%;
     width: 600px;
     height: 600px;
+    background: radial-gradient(circle, rgba(228, 30, 38, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse 4s ease-in-out infinite;
+}
+
+.hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
     background: radial-gradient(circle, rgba(228, 30, 38, 0.1) 0%, transparent 70%);
     border-radius: 50%;
+    animation: pulse 5s ease-in-out infinite reverse;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
 }
 
 .hero-content {
@@ -209,8 +244,15 @@ main {
 .hero-subtitle {
     font-size: clamp(1rem, 3vw, 1.5rem);
     color: #bbb;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     font-weight: 300;
+}
+
+.hero-tagline {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    color: var(--accent-color);
+    font-weight: 500;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 .hero-buttons {
@@ -1255,5 +1297,278 @@ footer a:hover {
 
     .show-info p {
         font-size: 0.8rem;
+    }
+}
+
+/* ========== CONTACT PAGE STYLES ========== */
+.contact-hero {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(228, 30, 38, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.contact-hero .page-title {
+    color: var(--white);
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.contact-page {
+    background: var(--light-bg);
+    min-height: 60vh;
+}
+
+/* Contact Info Card */
+.contact-info-card {
+    background: var(--white);
+    border-radius: 15px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow-lg);
+    height: 100%;
+    position: sticky;
+    top: 100px;
+}
+
+.contact-info-header h2 {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.contact-items {
+    margin-top: 2rem;
+}
+
+.contact-item-card {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #eee;
+    transition: all 0.3s ease;
+}
+
+.contact-item-card:last-child {
+    border-bottom: none;
+}
+
+.contact-item-card:hover {
+    padding-left: 0.5rem;
+}
+
+.contact-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #e41e26 0%, #c41a22 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(228, 30, 38, 0.3);
+}
+
+.contact-details h4 {
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.contact-details p {
+    color: #666;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.contact-details a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-details a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* Albanian Pride Box */
+.albanian-pride-box {
+    background: linear-gradient(135deg, #e41e26 0%, #c41a22 100%);
+    border-radius: 12px;
+    padding: 1.5rem;
+    color: var(--white);
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(228, 30, 38, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.albanian-pride-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.albanian-pride-box .pride-content {
+    position: relative;
+    z-index: 1;
+}
+
+.albanian-pride-box i {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.albanian-pride-box h5 {
+    color: var(--white);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.albanian-pride-box p {
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Contact Form Card */
+.contact-form-card {
+    background: var(--white);
+    border-radius: 15px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow-lg);
+}
+
+.form-header h2 {
+    color: var(--text-color);
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.contact-form .form-floating {
+    margin-bottom: 1rem;
+}
+
+.contact-form .form-control,
+.contact-form .form-select {
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 1rem;
+    transition: all 0.3s ease;
+}
+
+.contact-form .form-control:focus,
+.contact-form .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(228, 30, 38, 0.25);
+}
+
+.contact-form label {
+    color: #666;
+    font-weight: 500;
+}
+
+.contact-form textarea.form-control {
+    min-height: 200px;
+    resize: vertical;
+}
+
+.contact-form .btn {
+    border-radius: 10px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.contact-form .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(228, 30, 38, 0.4);
+}
+
+/* Albanian Cultural Banner */
+.albanian-culture-banner {
+    background: linear-gradient(135deg, #e41e26 0%, #c41a22 100%);
+    color: var(--white);
+    padding: 2rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.albanian-culture-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+    opacity: 0.3;
+}
+
+.albanian-culture-banner .banner-content {
+    position: relative;
+    z-index: 1;
+}
+
+.albanian-culture-banner h3 {
+    color: var(--white);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.albanian-culture-banner p {
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+/* Responsive Contact Page */
+@media (max-width: 992px) {
+    .contact-info-card {
+        position: static;
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-hero .page-title {
+        font-size: 2rem;
+    }
+    
+    .contact-info-card,
+    .contact-form-card {
+        padding: 1.5rem;
+    }
+    
+    .contact-item-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .contact-icon {
+        margin: 0 auto;
     }
 }

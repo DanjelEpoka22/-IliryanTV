@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="login-container">
                     <div class="login-header">
                         <h1><i class="fas fa-crown text-warning me-2"></i>Admin Login</h1>
-                        <p>Hyr në panelin administrativ</p>
+                        <p>Hyr në panelin administrativ të <?php echo SITE_NAME; ?></p>
                     </div>
 
                     <?php if ($error): ?>
@@ -149,7 +149,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </form>
 
                     <div class="text-center mt-3">
-                        <a href="../index.php" class="text-decoration-none text-muted">
+                        <a href="../login.php" class="text-decoration-none text-muted me-3">
+                            <i class="fas fa-user me-1"></i>Hyr si Përdorues
+                        </a>
+                        <span class="text-muted">|</span>
+                        <a href="../index.php" class="text-decoration-none text-muted ms-3">
                             <i class="fas fa-arrow-left me-1"></i>Kthehu në faqen kryesore
                         </a>
                     </div>

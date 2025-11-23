@@ -6,7 +6,7 @@
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6">
                     <h4 class="text-danger mb-4">
-                        <i class="fas fa-tv me-2"></i>IliryanTV
+                        <i class="fas fa-tv me-2"></i>IllyrianTV
                     </h4>
                     <p class="text-light">Televizioni patriotik shqiptar - Lajmet më të fundit në kohë reale</p>
                     <div class="social-links mt-4">
@@ -32,7 +32,7 @@
                     <ul class="list-unstyled">
                         <li class="mb-2"><i class="fas fa-map-marker-alt text-danger me-2"></i> Rruga Iliria, Tiranë</li>
                         <li class="mb-2"><i class="fas fa-phone text-danger me-2"></i> +355 4 123 4567</li>
-                        <li class="mb-2"><i class="fas fa-envelope text-danger me-2"></i> info@iliryantv.com</li>
+                        <li class="mb-2"><i class="fas fa-envelope text-danger me-2"></i> info@illyriantv.com</li>
                     </ul>
                 </div>
                 
@@ -49,7 +49,7 @@
             <hr class="my-4 bg-secondary">
             
             <div class="text-center py-3">
-                <p class="mb-0">&copy; <?php echo date('Y'); ?> IliryanTV. Të gjitha të drejtat e rezervuara.</p>
+                <p class="mb-0">&copy; <?php echo date('Y'); ?> IllyrianTV. Të gjitha të drejtat e rezervuara.</p>
             </div>
         </div>
     </footer>

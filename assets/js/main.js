@@ -1,5 +1,5 @@
 // Modern JavaScript with GSAP animations and interactive features
-class IliryanTV {
+class IllyrianTV {
     constructor() {
         this.init();
     }
@@ -257,9 +257,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize main functionality
     try {
-        window.iliryanTV = new IliryanTV();
+        window.illyrianTV = new IllyrianTV();
     } catch (error) {
-        console.error('Error initializing IliryanTV:', error);
+        console.error('Error initializing IllyrianTV:', error);
     }
 });
 
